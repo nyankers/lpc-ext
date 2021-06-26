@@ -196,8 +196,10 @@ static void ext_finish(void)
     close(in);
     close(out);
     close(back);
+# if 0
 # ifndef WIN32
     waitpid(pid, &out, 0);
+# endif
 # endif
 }
 
@@ -239,6 +241,8 @@ int lpc_ext_spawn(const char *program)
 	close(input[1]);
 	close(output[0]);
 	close(output[1]);
+
+	(*ext_spawn)(NULL, NULL);
 
 	/*
 	 * receive file descriptors to close, until there are none left
